@@ -1,4 +1,7 @@
 import React from 'react';
+import windIcon from '../../assets/wind.png';
+import humidityIcon from '../../assets/humidity.png';
+import cloudIcon from '../../assets/cloud.png';
 
 const WeatherCard = ({ weatherData }) => {
   return (
@@ -12,17 +15,17 @@ const WeatherCard = ({ weatherData }) => {
       <p className="text-4xl font-bold mt-4">{weatherData.main.temp} °C</p>
       <div className="parameter-container w-full flex justify-between mt-4">
         <div className="parameter flex flex-col items-center">
-          <img src="/assets/wind.png" alt="Wind" className="w-12 h-12"/>
+          <img src={windIcon} alt="Wind" className="w-12 h-12"/>
           <p className="text-sm font-semibold uppercase">Wind Speed</p>
           <p className="text-sm font-light">{weatherData.wind.speed} m/s</p>
         </div>
         <div className="parameter flex flex-col items-center">
-          <img src="/assets/humidity.png" alt="Humidity" className="w-12 h-12"/>
+          <img src={humidityIcon} alt="Humidity" className="w-12 h-12"/>
           <p className="text-sm font-semibold uppercase">Humidity</p>
           <p className="text-sm font-light">{weatherData.main.humidity}%</p>
         </div>
         <div className="parameter flex flex-col items-center">
-          <img src="/assets/cloud.png" alt="Cloudiness" className="w-12 h-12"/>
+          <img src={cloudIcon} alt="Cloudiness" className="w-12 h-12"/>
           <p className="text-sm font-semibold uppercase">Clouds</p>
           <p className="text-sm font-light">{weatherData.clouds.all}%</p>
         </div>

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import WeatherCard from './WeatherCard';
+import locationIcon from '../../assets/location.png';
+import loadingGif from '../../assets/loading.gif';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -98,7 +100,7 @@ const Weather = () => {
       {tab === 'userWeather' ? (
         !locationGranted ? (
           <div className="grant-location-container mt-4 flex flex-col items-center">
-            <img src="./assets/location.png" alt="Location" className="w-20 h-20 mb-8"/>
+            <img src={locationIcon} alt="Location" className="w-20 h-20 mb-8"/>
             <p className="text-lg font-bold">Grant Location Access</p>
             <p className="text-sm font-medium mt-3 mb-7 tracking-wide">Allow Access to get weather Information</p>
             <button onClick={getLocation} className="btn text-sm uppercase rounded bg-colorDark2 text-white py-2 px-8 mb-2 cursor-pointer">Grant Access</button>
@@ -107,7 +109,7 @@ const Weather = () => {
           <div className="mt-8">
             {loading ? (
               <div className="loading-container flex flex-col items-center mt-4">
-                <img src="./assets/loading.gif" alt="Loading" className="w-16 h-16"/>
+                <img src={loadingGif} alt="Loading" className="w-16 h-16"/>
                 <p className="text-sm font-medium uppercase">Loading</p>
               </div>
             ) : (
@@ -125,7 +127,7 @@ const Weather = () => {
         <div className="mt-8">
           {loading ? (
             <div className="loading-container flex flex-col items-center mt-4">
-              <img src="./assets/loading.gif" alt="Loading" className="w-16 h-16"/>
+              <img src={loadingGif} alt="Loading" className="w-16 h-16"/>
               <p className="text-sm font-medium uppercase">Loading</p>
             </div>
           ) : (
