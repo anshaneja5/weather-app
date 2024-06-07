@@ -1,8 +1,26 @@
-# React + Vite
+# Vite Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive weather application built with Vite, React, and Tailwind CSS. This application allows users to get current weather information for their location as well as search for weather data for multiple locations using comma-separated city names. The app supports dark mode and provides a consistent UI for displaying weather information.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Weather:** Automatically fetches and displays weather information for the user's current location.
+- **Search Weather:** Allows users to search for weather data for multiple locations by entering comma-separated city names.
+- **Dark Mode:** Supports dark mode with a toggle switch.
+- **Responsive Design:** The app is fully responsive and adjusts to different screen sizes.
+
+## Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine.
+
+### Prerequisites
+
+- Node.js (>= 14.x)
+- npm (>= 6.x)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/anshaneja5/weather-app.git
+   cd vite-weather-app
