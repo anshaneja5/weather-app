@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import WeatherCard from './WeatherCard';
 import locationIcon from '../../assets/location.png';
 import loadingGif from '../../assets/loading.gif';
+import error404 from '../../assets/not-found.png';
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -11,6 +12,7 @@ const Weather = () => {
   const [searchWeatherDataList, setSearchWeatherDataList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [locationGranted, setLocationGranted] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (tab === 'userWeather') {
@@ -26,12 +28,17 @@ const Weather = () => {
 
   const fetchWeather = async (url, setData) => {
     setLoading(true);
+    setError(false); // Reset error state
     try {
       const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('City not found');
+      }
       const data = await response.json();
       setData(prev => [...prev, data]);
     } catch (error) {
       console.error("Failed to fetch weather data", error);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -41,12 +48,17 @@ const Weather = () => {
     const { lat, lon } = coordinates;
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
     setLoading(true);
+    setError(false); // Reset error state
     try {
       const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('City not found');
+      }
       const data = await response.json();
       setUserWeatherData(data);
     } catch (error) {
       console.error("Failed to fetch user weather data", error);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -72,6 +84,7 @@ const Weather = () => {
     e.preventDefault();
     const cities = e.target.elements.city.value.split(',');
     setSearchWeatherDataList([]); // Reset search weather data list
+    setError(false); // Reset error state
     cities.forEach(city => {
       if (city.trim()) {
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.trim()}&appid=${API_KEY}&units=metric`;
@@ -112,6 +125,11 @@ const Weather = () => {
                 <img src={loadingGif} alt="Loading" className="w-16 h-16"/>
                 <p className="text-sm font-medium uppercase">Loading</p>
               </div>
+            ) : error ? (
+              <div className="error-container flex flex-col items-center mt-4">
+                <img src={error404} alt="Error" className="w-32 h-32"/>
+                <p className="text-sm font-medium uppercase">City not found</p>
+              </div>
             ) : (
               userWeatherData && <WeatherCard weatherData={userWeatherData} />
             )}
@@ -129,6 +147,11 @@ const Weather = () => {
             <div className="loading-container flex flex-col items-center mt-4">
               <img src={loadingGif} alt="Loading" className="w-16 h-16"/>
               <p className="text-sm font-medium uppercase">Loading</p>
+            </div>
+          ) : error ? (
+            <div className="error-container flex flex-col items-center mt-4">
+              <img src={error404} alt="Error" className="w-32 h-32"/>
+              <p className="text-sm font-medium uppercase">City not found</p>
             </div>
           ) : (
             <div className="user-info-container mt-4 flex flex-wrap justify-center gap-4">
