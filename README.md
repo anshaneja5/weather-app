@@ -23,4 +23,4 @@ Follow these instructions to get a copy of the project up and running on your lo
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/anshaneja5/weather-app.git
-   cd vite-weather-app
+   cd weather-app
